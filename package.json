@@ -1,0 +1,25 @@
+{
+  "name": "reactifex",
+  "version": "0.0.1",
+  "description": "A helper for moving react-intl messages to transifex and back",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Congrats, you successfully tested an empty project!\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/efischer19/reactifex.git"
+  },
+  "keywords": [
+    "react-intl",
+    "transifex",
+    "json",
+    "i18n"
+  ],
+  "author": "Eric Fischer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/efischer19/reactifex/issues"
+  },
+  "homepage": "https://github.com/efischer19/reactifex#readme"
+}
