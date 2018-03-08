@@ -4,6 +4,7 @@
   "description": "A helper for moving react-intl messages to transifex and back",
   "bin": "./main.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "node main.js test_data/input/ test_data/test_output.json && diff test_data/test_output.json test_data/expected_output/messages.json"
   },
   "repository": {
@@ -21,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/efischer19/reactifex/issues"
   },
-  "homepage": "https://github.com/efischer19/reactifex#readme"
+  "homepage": "https://github.com/efischer19/reactifex#readme",
+  "devDependencies": {
+    "eslint": "^4.18.2"
+  }
 }
