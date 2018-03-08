@@ -4,7 +4,7 @@
   "description": "A helper for moving react-intl messages to transifex and back",
   "bin": "./main.js",
   "scripts": {
-    "test": "echo \"Congrats, you successfully tested an empty project!\" && exit 0"
+    "test": "node main.js test_data/extracted_messages.json"
   },
   "repository": {
     "type": "git",
