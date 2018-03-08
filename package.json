@@ -2,7 +2,7 @@
   "name": "reactifex",
   "version": "0.0.1",
   "description": "A helper for moving react-intl messages to transifex and back",
-  "main": "main.js",
+  "bin": "./main.js",
   "scripts": {
     "test": "echo \"Congrats, you successfully tested an empty project!\" && exit 0"
   },
