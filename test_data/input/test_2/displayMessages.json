@@ -1,0 +1,12 @@
+[
+  {
+    "id": "testMessage_extra",
+    "description": "It's a message, for testing",
+    "defaultMessage": "HELLO, WORLD!_extra"
+  },
+  {
+    "id": "anotherTestMessage_extra",
+    "description": "Also a message for testing",
+    "defaultMessage": "The quick brown fox jumped over the lazy dog_extra"
+  }
+]
