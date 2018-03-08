@@ -4,7 +4,7 @@
   "description": "A helper for moving react-intl messages to transifex and back",
   "bin": "./main.js",
   "scripts": {
-    "test": "node main.js test_data/extracted_messages.json test_data/test_output.json && diff test_data/test_output.json test_data/expected_output.json"
+    "test": "node main.js test_data/input/ test_data/test_output.json && diff test_data/test_output.json test_data/expected_output/messages.json"
   },
   "repository": {
     "type": "git",

@@ -1,10 +1,22 @@
 #!/usr/bin/env node
-var fs = require('fs');
+const path = require('path');
+const fs = require('fs');
 
-var inData = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+combineInputs = (dir) => {
+  // expected input: a directory containing subdirs, each of which contains displayMessages.json
+  var ret = [];
+  subDirs = fs.readdirSync(dir);
+  subDirs.forEach((subdir) => {
+    messageFile = path.join(dir, subdir, 'displayMessages.json');
+    messages = JSON.parse(fs.readFileSync(messageFile));
+    messages.forEach((message) => {ret.push(message);});
+  });
+  return ret;
+}
+var inData = combineInputs(process.argv[2]);
 
 var outData = {}
 inData.forEach((message) => {
   outData[message["id"]] = message["defaultMessage"];
 });
-fs.writeFile(process.argv[3], JSON.stringify(outData, null, 2), 'utf8');
+fs.writeFileSync(process.argv[3], JSON.stringify(outData, null, 2));
