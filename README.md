@@ -23,7 +23,7 @@ usage: `$(npm bin)/reactifex <input_folder> <output_file>`
 
 This mode is why I wrote this library in the first place. By default, Transifex's `KEYVALUEJSON` file format does not allow for comments to be included with strings for translation. These can be incredibly illuminating for translators though, so I've set up reactifex to rectify that situation. Note that tests for this mode aren't included, as it relies on Transifex's API being up and responsive.
 
-Usage is a little complicated, I'm sorry about that; you're going to be running this server-side as a series of bash commands. Do note that I assume `$SECRET_USER` and `$SECRET_PWD` env vars exist for basic auth purposes. See [Transifex's API Introduction](https://docs.transifex.com/api/introduction) for more details on authentication. Here's an example, written as it would be in the Makefile of a projecy that makes use of reactifex:
+Usage is a little complicated, I'm sorry about that; you're going to be running this server-side as a series of bash commands. Do note that I assume `$SECRET_USER` and `$SECRET_PWD` env vars exist for basic auth purposes. See [Transifex's API Introduction](https://docs.transifex.com/api/introduction) for more details on authentication. Here's an example, written as it would be in the Makefile of a project that makes use of reactifex:
 
 ```
 tx_url1 = https://www.transifex.com/api/2/project/<project>/resource/<resource>/translation/<default_language_code>/strings/
