@@ -29,15 +29,15 @@ Usage is a little complicated, I'm sorry about that. This is intended to be run 
 tx_url1 = https://www.transifex.com/api/2/project/<project>/resource/<resource>/translation/<default_language_code>/strings/
 tx_url2 = https://www.transifex.com/api/2/project/<project>/resource/<resource>/source/
 push_translations:
-  ./node_modules/reactifex/bash_scripts/get_hashed_strings.sh $(tx_url1)
-  $$(npm bin)/reactifex <input_folder> --comments
-  ./node_modules/reactifex/bash_scripts/put_comments.sh $(tx_url2)
+    ./node_modules/reactifex/bash_scripts/get_hashed_strings.sh $(tx_url1)
+    $$(npm bin)/reactifex <input_folder> --comments
+    ./node_modules/reactifex/bash_scripts/put_comments.sh $(tx_url2)
 ```
 
-[tx_url1](https://docs.transifex.com/api/translation-strings#identifying-strings-using-hashes) and [tx_url2](https://docs.transifex.com/api/resource-strings) are just variables as defined by the Transifex API documentation, extracted for readability.
+  - [tx_url1](https://docs.transifex.com/api/translation-strings#identifying-strings-using-hashes) and [tx_url2](https://docs.transifex.com/api/resource-strings) are just variables as defined by the Transifex API documentation, extracted for readability.
 
-First, `bash_scripts/get_hashed_strings` is called with a url argument. This will populate `bash_scripts/hashmap.json` with data about the strings in your resource, including the all-important `string_hash`.
+  - First, `bash_scripts/get_hashed_strings.sh` is called with a url argument. This will populate `bash_scripts/hashmap.json` with data about the strings in your resource, including the all-important `string_hash`.
 
-Next, the main reactifex script (node js) runs with an additional `--comments` flag, and no output file. This has the effect of gathering up all your `babel-plugin-react-intl` extracted messages *with* their comments attached. From there, it's simple enough to match up each message with its `string_hash`, and makes it possible to generate `bash_scripts/put_comments.sh` (a series of curl requests, one per message)
+  - Next, the main reactifex script (node js) runs with an additional `--comments` flag, and no output file. This has the effect of gathering up all your `babel-plugin-react-intl` extracted messages *with* their comments attached. From there, it's simple enough to match up each message with its `string_hash`, and makes it possible to generate `bash_scripts/put_comments.sh` (a series of curl requests, one per message)
 
-Finally, `bash_scripts/put_comments.sh` is run with the base PUT url (we generated the specific `string_hash` portion in the previous step), updating translator comments for each message on Transifex via their API.
+  - Finally, `bash_scripts/put_comments.sh` is run with the base PUT url as an argument (we generated the specific `string_hash` portion in the previous step), updating translator comments for each message on Transifex via their API.
