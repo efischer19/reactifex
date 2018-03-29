@@ -1,13 +1,43 @@
 # reactifex
 
+Helper utility designed to make it easy to upload react-intl extracted messages to transifex, with support for ICU plurals and translator comments.
+
 [![dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](reactifex)
 [![license](https://img.shields.io/npm/l/reactifex.svg)](reactifex)
 [![npm_version](https://img.shields.io/npm/v/reactifex.svg)](reactifex)
 [![Build Status](https://travis-ci.org/efischer19/reactifex.svg?branch=master)](https://travis-ci.org/efischer19/reactifex)
 
-Helper utility designed to make it easy to upload react-intl extracted messages to transifex, with support for ICU plurals and translator comments.
+
+There are two modes of usage - compilation and comment pushing.
+
+## Compilation mode
+
+In this mode, messages that have been extracted by `babel-plugin-react-intl` (into individual files) are combined. The resulting json is suitable to upload to Transifex and matches their specified `KEYVALUEJSON` format.
 
 usage: `$(npm bin)/reactifex <input_folder> <output_file>`
   - `input_folder` corresponds to the `messagesDir` option used by `babel-plugin-react-intl`
     - note that reactifex assumes folder structure based on this default
   - `output_file` will be suitable for upload to transifex
+
+## Comment pushing
+
+This mode is why I wrote this library in the first place. By default, Transifex's `KEYVALUEJSON` file format does not allow for comments to be included with strings for translation. These can be incredibly illuminating for translators though, so I've set up reactifex to make it possible to perform a series of PUT requests against the Transifex API to update the comments for strings that are already present in a Transifex project.
+
+Usage is a little complicated, I'm sorry about that. This is intended to be run server-side as a series of bash commands. Here's an example, written as they would be in a Makefile. Do note that I assume $SECRET_USER and $SECRET_PWD env vars are set; if they are not you're likely to see basic auth failures. See [Transifex's API Introduction](https://docs.transifex.com/api/introduction) for more on how to set up authentication.
+
+```
+tx_url1 = https://www.transifex.com/api/2/project/<project>/resource/<resource>/translation/<default_language_code>/strings/
+tx_url2 = https://www.transifex.com/api/2/project/<project>/resource/<resource>/source/
+push_translations:
+  ./node_modules/reactifex/bash_scripts/get_hashed_strings.sh $(tx_url1)
+  $$(npm bin)/reactifex <input_folder> --comments
+  ./node_modules/reactifex/bash_scripts/put_comments.sh $(tx_url2)
+```
+
+[tx_url1](https://docs.transifex.com/api/translation-strings#identifying-strings-using-hashes) and [tx_url2](https://docs.transifex.com/api/resource-strings) are just variables as defined by the Transifex API documentation, extracted for readability.
+
+First, `bash_scripts/get_hashed_strings` is called with a url argument. This will populate `bash_scripts/hashmap.json` with data about the strings in your resource, including the all-important `string_hash`.
+
+Next, the main reactifex script (node js) runs with an additional `--comments` flag, and no output file. This has the effect of gathering up all your `babel-plugin-react-intl` extracted messages *with* their comments attached. From there, it's simple enough to match up each message with its `string_hash`, and makes it possible to generate `bash_scripts/put_comments.sh` (a series of curl requests, one per message)
+
+Finally, `bash_scripts/put_comments.sh` is run with the base PUT url (we generated the specific `string_hash` portion in the previous step), updating translator comments for each message on Transifex via their API.
