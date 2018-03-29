@@ -21,7 +21,9 @@ usage: `$(npm bin)/reactifex <input_folder> <output_file>`
 
 ## Comment pushing
 
-This mode is why I wrote this library in the first place. By default, Transifex's `KEYVALUEJSON` file format does not allow for comments to be included with strings for translation. These can be incredibly illuminating for translators though, so I've set up reactifex to rectify that situation. Note that tests for this mode aren't included, as it relies on Transifex's API being up and responsive.
+This mode is why I wrote this library in the first place - I wanted the ability to use comments as `PO` files do, but none of the tools I found to convert react-intl messages to `PO` files were able to properly handle ICU pluralization. By keeping everything in a js context with `KEYVALUEJSON`, plurals work correctly *and* we now have comment support for translators (by default, Transifex's `KEYVALUEJSON` file format does not allow for comments to be included with strings for translation).
+
+Note that tests for this mode aren't included, as it relies on Transifex's API being up and responsive.
 
 Usage is a little complicated, I'm sorry about that; you're going to be running this server-side as a series of bash commands. Do note that I assume `$SECRET_USER` and `$SECRET_PWD` env vars exist for basic auth purposes. See [Transifex's API Introduction](https://docs.transifex.com/api/introduction) for more details on authentication. Here's an example, written as it would be in the Makefile of a project that makes use of reactifex:
 
