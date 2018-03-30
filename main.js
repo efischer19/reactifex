@@ -25,7 +25,6 @@ if (process.argv[3] === "--comments") {
   var messageInfo = JSON.parse(fs.readFileSync(__dirname + "/bash_scripts/hashmap.json"));
   var scriptPath = __dirname + "/bash_scripts/put_comments.sh";
   fs.writeFileSync(scriptPath, "#!/bin/bash\n");
-  fs.writeFileSync(scriptPath, "set -x\n");
   inData.forEach((message) => {
     var info = messageInfo.find(mi => mi.key == message.id);
     if (info) {
@@ -38,7 +37,6 @@ if (process.argv[3] === "--comments") {
       process.stdout.write("string " + message.id + " does not yet exist on transifex!\n");
     }
   });
-  fs.writeFileSync(scriptPath, "set +x\n");
 } else {
   fs.writeFileSync(process.argv[3], JSON.stringify(outData, null, 2));
 }
