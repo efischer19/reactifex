@@ -23,16 +23,12 @@ inData.forEach((message) => {
 if (process.argv[3] === "--comments") {
   process.stdout.write("generating bash scripts...\n");
   var messageInfo = JSON.parse(fs.readFileSync(__dirname + "/bash_scripts/hashmap.json"));
-  var scriptPath = __dirname + "/bash_scripts/put_comments.sh";
-  fs.writeFileSync(scriptPath, "#!/bin/bash\n");
+  var dataPath = __dirname + "/bash_scripts/hashed_data.txt";
+  fs.writeFileSync(dataPath, "");
   inData.forEach((message) => {
     var info = messageInfo.find(mi => mi.key == message.id);
     if (info) {
-      var header = " -H \"Content-Type: application/json\"";
-      var escapedDescription = message.description.replace(/(["])/g, "\\\\\\$1");
-      var data = " --data \"{\\\"comment\\\": \\\"" + escapedDescription + "\\\"}\"";
-      var url = " $1" + info.string_hash;
-      fs.appendFileSync(scriptPath, "curl -L -w \"\\n\" --user $SECRET_USER:$SECRET_PWD -X PUT" + header + data + url + "\n");
+      fs.appendFileSync(dataPath, info.string_hash + "|" + message.description + "\n");
     } else {
       process.stdout.write("string " + message.id + " does not yet exist on transifex!\n");
     }
