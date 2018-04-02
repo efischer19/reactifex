@@ -1,0 +1,4 @@
++ curl -L -w '\n' --user uname:password -X PUT -H 'Content-Type: application/json' --data '{"comment": "It'\''s a message, for testing"}' http://totally_real.notfake.com/api/12345deadbeef
++ curl -L -w '\n' --user uname:password -X PUT -H 'Content-Type: application/json' --data '{"comment": "Also a message for testing"}' http://totally_real.notfake.com/api/8badf00d
++ curl -L -w '\n' --user uname:password -X PUT -H 'Content-Type: application/json' --data '{"comment": "It'\''s a message, for testing"}' http://totally_real.notfake.com/api/bada55
++ curl -L -w '\n' --user uname:password -X PUT -H 'Content-Type: application/json' --data '{"comment": "Also a message for testing"}' http://totally_real.notfake.com/api/feedface9876

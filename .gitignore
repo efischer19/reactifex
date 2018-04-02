@@ -59,6 +59,7 @@ typings/
 
 # test output for diffs
 test_data/test_output.json
+output.txt
 
 # package-lock is dumb and not at all worth it here
 package-lock.json
