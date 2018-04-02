@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "test_compile": "node main.js test_data/input/ test_data/test_output.json && diff test_data/test_output.json test_data/expected_output/messages.json",
-    "test_comments": "node main.js test_data/input/ --comments && SECRET_USER=uname SECRET_PWD=password bash -x ./bash_scripts/put_comments.sh http://totally_real.notfake.com/api/ 2>&1 | grep PUT > output.txt && diff output.txt test_data/expected_output/test_curl.txt"
+    "test_comments": "node main.js test_data/input/ --comments && SECRET_USER=uname SECRET_PWD=password bash -x ./bash_scripts/put_comments.sh http://totally_real.notfake.com/api/ 2>&1 | grep PUT > output.txt && diff -w output.txt test_data/expected_output/test_curl.txt"
   },
   "repository": {
     "type": "git",
