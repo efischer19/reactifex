@@ -3,7 +3,13 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": "airbnb",
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+          "jsx": true
+        }
+    },
     "rules": {
         "linebreak-style": [
             "error",
@@ -16,6 +22,15 @@
         "semi": [
             "error",
             "always"
+        ],
+        "keyword-spacing": [
+            "error", { 
+                "before": true, "after": true 
+            }
+        ],
+        "max-len": [
+            "error",
+            120
         ]
     }
 }
