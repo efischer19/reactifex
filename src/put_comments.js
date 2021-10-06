@@ -43,7 +43,7 @@ yargs.option(
   .option(
     "inputFileDirectory", {
       description: "Directory where the input file hashed_data.txt will be read from",
-      default: "./node_modules/reactifex/bash_scripts",
+      default: "./node_modules/@edx/reactifex/bash_scripts",
     },
   )
   .option(
