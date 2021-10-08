@@ -27,6 +27,9 @@
   "bugs": {
     "url": "https://github.com/edx/reactifex/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/edx/reactifex#readme",
   "devDependencies": {
     "eslint": "^7.32.0",
