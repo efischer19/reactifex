@@ -31,7 +31,7 @@ yargs.option(
   .option(
     "outputJsonDirectory", {
       description: "Directory where the hashmap json file will be created",
-      default: "./node_modules/reactifex/bash_scripts",
+      default: "./node_modules/@edx/reactifex/bash_scripts",
     },
   )
   .option(
