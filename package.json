@@ -10,7 +10,8 @@
   },
   "files": [
     "main.js",
-    "bash_scripts/"
+    "bash_scripts/",
+    "src/"
   ],
   "repository": {
     "type": "git",
