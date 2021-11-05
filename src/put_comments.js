@@ -101,7 +101,7 @@ async function addInstructions(translationStringsData, args) {
   if (translationStringsData.length !== 0) {
     const resourceIdBaseString = `o:${args.org}:p:${args.project}:r:${args.resource}`;
 
-    translationStringsData.forEach(async (value) => {
+    for (let counter = 0; counter < translationStringsData.length; counter += 1) {
       /*
       Convert string <hash>|<instructions> into list
       Get hash from the first element
@@ -109,17 +109,20 @@ async function addInstructions(translationStringsData, args) {
       so that if the instruction string itself contained |, the splitted data length will
       be more than 2 and there might be chance of incomplete instruction being added to Transifex.
       */
+      const value = translationStringsData[counter];
       const valueList = value.split("|");
       const hash = valueList[0];
       const instructions = valueList.slice(1).join("|");
       const stringId = `${resourceIdBaseString}:s:${hash}`;
       process.stdout.write(`Hash: ${stringId}, Instructions: ${instructions}\n`);
+      // eslint-disable-next-line no-await-in-loop
       await addStringInstructions(stringId, instructions, args.token);
-    });
+      process.stdout.write(`Instruction addition for Hash ${stringId} completed\n`);
+    }
   }
 }
 
-async function main() {
+(async function () {
   const args = yargs.argv;
   const inputFilePath = `${args.inputFileDirectory}/hashed_data.txt`;
   let inputData = [];
@@ -130,8 +133,4 @@ async function main() {
     process.stderr.write(`Encountered an error while attempting to open ${inputFilePath}\nError:${error.message}\n`);
   }
   await addInstructions(inputData, args);
-}
-
-(async function () {
-  await main();
 }());
