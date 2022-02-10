@@ -3,25 +3,28 @@ name: Node CI
 on:
   push:
     branches:
-      - master
+    - master
   pull_request:
     branches:
-      - "**"
+    - '**'
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node: [16]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Setup Nodejs
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
+    - name: Setup Nodejs
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node }}
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
       # The owning team will fix the issues and uncomment the steps after necessary linting and configuring changes
       #- name: Lint
       #  run: npm run lint
