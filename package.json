@@ -2,7 +2,9 @@
   "name": "@edx/reactifex",
   "version": "1.0.0-semantically-released",
   "description": "A helper for moving react-intl messages to transifex and back",
-  "bin": "./main.js",
+  "bin": {
+    "edx_reactifex": "./main.js"
+  },
   "scripts": {
     "lint": "eslint .",
     "test_compile": "node main.js test_data/input/ test_data/test_output.json && diff test_data/test_output.json test_data/expected_output/messages.json",
