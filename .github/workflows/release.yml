@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 16
       - name: Install dependencies
         run: npm ci
       # TODO: Uncomment the steps once the repo have appropriate unit tests and lint config in place
