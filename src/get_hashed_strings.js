@@ -15,38 +15,30 @@ const fs = require("fs");
 const yargs = require("yargs");
 
 // Configure command line arguments with yargs
-yargs.option(
-  "organization", {
+yargs
+  .option("organization", {
     alias: ["o", "org"],
     default: "open-edx",
     description: "Organization associated with Transifex account",
-  },
-).option(
-  "project", {
+  })
+  .option("project", {
     alias: ["p", "proj"],
     default: "edx-platform",
     description: "Project within a Transifex organization",
-  },
-)
-  .option(
-    "outputJsonDirectory", {
-      description: "Directory where the hashmap json file will be created",
-      default: "./node_modules/@edx/reactifex/bash_scripts",
-    },
-  )
-  .option(
-    "resource", {
-      alias: ["r", "res"],
-      demandOption: true,
-      description: "Resource within a Transifex project whose translation strings are to be fetched",
-    },
-  )
-  .option(
-    "token", {
-      description: "Bearer token required for Authentication when making API calls to Transifex",
-      demandOption: true,
-    },
-  );
+  })
+  .option("outputJsonDirectory", {
+    description: "Directory where the hashmap json file will be created",
+    default: "./node_modules/@edx/reactifex/bash_scripts",
+  })
+  .option("resource", {
+    alias: ["r", "res"],
+    demandOption: true,
+    description: "Resource within a Transifex project whose translation strings are to be fetched",
+  })
+  .option("token", {
+    description: "Bearer token required for Authentication when making API calls to Transifex",
+    demandOption: true,
+  });
 
 const API_BASE_URL = "https://rest.api.transifex.com/resource_strings";
 const OUTPUT_JSON_PATH = `${yargs.argv.outputJsonDirectory}/hashmap.json`;

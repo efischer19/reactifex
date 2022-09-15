@@ -10,7 +10,7 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node: [16]
@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ matrix.node }}
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
       # The owning team will fix the issues and uncomment the steps after necessary linting and configuring changes
     - name: Lint
       run: npm run lint

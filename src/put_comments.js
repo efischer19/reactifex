@@ -20,38 +20,30 @@ const yargs = require("yargs");
 const API_BASE_URL = "https://rest.api.transifex.com/resource_strings";
 
 // Configure command line arguments with yargs
-yargs.option(
-  "organization", {
+yargs
+  .option("organization", {
     alias: ["o", "org"],
     default: "open-edx",
     description: "Organization associated with Transifex account",
-  },
-).option(
-  "project", {
+  })
+  .option("project", {
     alias: ["p", "proj"],
     default: "edx-platform",
     description: "Project within a Transifex organization",
-  },
-)
-  .option(
-    "resource", {
-      alias: ["r", "res"],
-      demandOption: true,
-      description: "Resource within a Transifex project whose translation strings instructions will be added",
-    },
-  )
-  .option(
-    "inputFileDirectory", {
-      description: "Directory where the input file hashed_data.txt will be read from",
-      default: "./node_modules/@edx/reactifex/bash_scripts",
-    },
-  )
-  .option(
-    "token", {
-      description: "Bearer token required for Authentication when making API calls to Transifex",
-      demandOption: true,
-    },
-  );
+  })
+  .option("resource", {
+    alias: ["r", "res"],
+    demandOption: true,
+    description: "Resource within a Transifex project whose translation strings instructions will be added",
+  })
+  .option("inputFileDirectory", {
+    description: "Directory where the input file hashed_data.txt will be read from",
+    default: "./node_modules/@edx/reactifex/bash_scripts",
+  })
+  .option("token", {
+    description: "Bearer token required for Authentication when making API calls to Transifex",
+    demandOption: true,
+  });
 
 /*
 Given the input file buffer, return a list of strings, each string in format <resource_hash>|<instructions>
@@ -77,14 +69,12 @@ async function addStringInstructions(stringId, instructions, authToken) {
 
   try {
     process.stdout.write(`Attempting instructions addition for string Id ${stringId}\n`);
-    await axios.patch(
-      resourceUrl, payload, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "application/vnd.api+json",
-        },
+    await axios.patch(resourceUrl, payload, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/vnd.api+json",
       },
-    );
+    });
     process.stdout.write(`Instruction addition for string id ${stringId} has completed successfully\n`);
   } catch (err) {
     process.stderr.write(`Error adding instructions for string ${stringId} \nMessage: ${err.message}\n`);
