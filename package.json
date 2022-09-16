@@ -17,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edx/reactifex.git"
+    "url": "git+https://github.com/openedx/reactifex.git"
   },
   "keywords": [
     "react-intl",
@@ -28,12 +28,12 @@
   "author": "Eric Fischer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/edx/reactifex/issues"
+    "url": "https://github.com/openedx/reactifex/issues"
   },
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/edx/reactifex#readme",
+  "homepage": "https://github.com/openedx/reactifex#readme",
   "devDependencies": {
     "eslint": "^8.23.1",
     "eslint-config-airbnb": "^19.0.4",
